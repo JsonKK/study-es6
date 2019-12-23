@@ -120,6 +120,42 @@ var main = function () {
         console.log('基本的三角函数log,sin,cos',log,sin,cos);
 
     }
+
+    //字符串的解构赋值
+    {
+        const [a,b,c,d,e] = 'hello';
+        console.log('a=%s,b=%s,c=%s,d=%s,e=%s',a,b,c,d,e);
+
+        let {length : len} = 'hello';
+        console.log('len=%d',len);
+    }
+
+    //函数参数解构赋值
+    {
+        function add([x,y]){
+            return x + y;
+        }
+        console.log('x+y=%d',add([1,2]));
+
+        console.log([[1,2],[3,4]].map(([a,b]) => a + b));
+
+        function move({x = 0,y = 0}){
+            return [x,y];
+        }
+
+        console.log('move',move({x:3,y:8}));
+        console.log('move',move({x:3}));
+        console.log('move',move({}));
+        //console.log(move());//报错
+
+        function move2({x,y}={x:0,y:0}){
+            return [x,y];
+        }
+        console.log('move2',move2({x:3,y:8}));
+        console.log('move2',move2({x:3}));
+        console.log('move2',move2({}));
+        console.log('move2',move2());
+    }
     
 }
 
