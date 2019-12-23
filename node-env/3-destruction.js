@@ -156,7 +156,51 @@ var main = function () {
         console.log('move2',move2({}));
         console.log('move2',move2());
     }
+
+    //正确使用圆括号
+    {
+        let b;
+        [(b)] = [3];
+        console.log('括号b=%d',b);
+
+        [(parseInt.prop)] = [3];
+        console.log(parseInt.prop);
+    }
     
+    //解构的用途
+    {
+        //调换位置
+        let [x,y] = [3,4];
+        [x,y] = [y,x];
+        console.log('移位x=%d,y=%d',x,y);
+
+        // 返回和接收多个值
+        function example(){
+            return [1,2,3];
+        }
+        var [a,b,c] = example();
+        console.log('返回的a=%d,b=%d,c=%d',a,b,c);
+
+        //返回对象接收
+        function backObj(){
+            return {
+                foo : 1,
+                bar : 2
+            }
+        }
+        var { foo , bar } = backObj();
+        console.log('解构接收函数返回的对象foo=%d,bar=%d',foo,bar);
+    }
+
+    //不知道的map应用
+    {
+        var map = new Map();
+        map.set('first','hello');
+        map.set('second','world');
+        for(let [key,value] of map){
+            console.log('解构map的key=%s,value=%s',key,value);
+        }
+    }
 }
 
 module.exports = main;

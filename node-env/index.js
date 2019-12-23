@@ -7,4 +7,7 @@ require('./begin')();
 require('./set')();
 
 //执行destruction
-require('./destruction')();
+require('./3-destruction')();
+
+//执行第四章
+require('./4-string')();
