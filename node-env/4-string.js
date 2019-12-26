@@ -34,7 +34,7 @@ var main = function () {
             onSale: '在售'
         };
         let modelStr = ` There are <b>${basket.count}</b> items in your basket, <em>${basket.onSale}</em>are on sale!`;
-        console.log('输出模板字符串:\nmodelStr=%s',modelStr);
+        console.log('输出模板字符串:\nmodelStr=%s', modelStr);
 
         //不想要空格处理
         let list = `
@@ -43,7 +43,7 @@ var main = function () {
                 <li>second</li>
             </ul>
         `.trim();
-        console.log('压缩过的模板字符串list=%s',list);
+        console.log('压缩过的模板字符串list=%s', list);
 
         //模板字符串嵌套
         const tmpl = (addrs) => `
@@ -55,10 +55,10 @@ var main = function () {
             </table>
         `;
         const sendData = [
-            {first : '<Jane>',last : 'Bond'},
-            {first : 'Lars' , last : '<Croft>'}
+            { first: '<Jane>', last: 'Bond' },
+            { first: 'Lars', last: '<Croft>' }
         ];
-        console.log('模板字符串嵌套:',tmpl(sendData));
+        console.log('模板字符串嵌套:', tmpl(sendData));
     }
 
     // 模板编译
@@ -73,17 +73,17 @@ var main = function () {
             </ul>
         `;
 
-        function compile(template){
+        function compile(template) {
             const evalExpr = /<%=(.+?)%>/g;
             const expr = /<%([\s\S]+?)%>/g;
 
             template = template
-                .replace(evalExpr,'`); \n echo ( $1 ); \n echo(`')
-                .replace(expr,'`); \n $1 \n echo(`');
+                .replace(evalExpr, '`); \n echo ( $1 ); \n echo(`')
+                .replace(expr, '`); \n $1 \n echo(`');
             template = 'echo(`' + template + '`);';
 
-            let script = 
-            `(function parse(data){
+            let script =
+                `(function parse(data){
                 let output = "";
 
                 function echo(html){
@@ -96,14 +96,111 @@ var main = function () {
             })`;
 
             return script;
-            
+
         }
 
         let parse = eval(compile(template));
-        let html = parse({ supplies: [ "broom", "mop", "cleaner" ] });
-        console.log('html',html);
-        
+        let html = parse({ supplies: ["broom", "mop", "cleaner"] });
+        console.log('html', html);
 
+
+    }
+
+     //标签模板
+     {
+        console.log`'这是个标签模板输出',123`;
+
+        let a = 5;
+        let b = 10;
+        let parms = `Hello ${a + b} world ${a * b}`;
+        console.log(parms);
+        // 等于console.log(['Hello ', ' world ', ''], 15, 50);
+        console.log`Hello ${a + b} world ${a * b}`;
+
+        //输出逻辑推导
+        function tag(s,v1,v2){
+            if(Array.isArray(s)){
+                console.log(s);
+                s.forEach(function(o,i){
+                    // console.log(o);
+                });
+            };
+            console.log(v1);
+            console.log(v2);
+        }
+        tag`Hello ${a + b} world ${a * b}`;
+
+        //复杂的标签模板
+        let total = 30;
+        let msg = passthru`The total is ${total} (${total*1.05} with tax)`;
+        function passthru(literals){
+            let result = '';
+            let i = 0;
+
+            while(i < literals.length){
+                result += literals[i++];
+                console.log('result',result);
+                if(i < arguments.length){
+                    result += arguments[i];
+                }
+            }
+            return result;
+        }
+        console.log(msg);
+    }
+
+    //函数采用rest参数的写法
+    {
+        //复杂的标签模板
+        let total = 30;
+        let msg = passthru`The total is ${total} (${total*1.05} with tax)`;
+        function passthru(literals, ...values){
+            let output = '';
+            let index;
+            for(index = 0; index < values.length; index++){
+                output += literals[index] + values[index];
+            }
+            output += literals[index];
+            return output;
+        }
+        console.log(msg);
+    }
+
+    //标签模板  过滤html
+    {
+        let sender = '<script>alert("abc")</script>';
+        let message = 
+            SafeHtml`<p>${sender} has sent you a message</p>`;
+        function SafeHtml(templateData){
+            let s = templateData[0];
+            for(let i = 1; i < arguments.length; i++){
+                let arg = String(arguments[i]);
+
+                s += arg.replace(/&/g,'&amp')
+                        .replace(/</g,'&lt')
+                        .replace(/>/g,'&gt');
+                s += templateData[i];
+            }
+            return s;
+        }
+        console.log('过滤html',message);
+    }
+
+    //模板字符串中的raw属性
+    {
+        tag`First line\nSecond line`;
+
+        function tag(strings){
+            console.log('模板字符串中的raw属性',strings.raw);
+        }
+    }
+
+    {
+        function tag(strs){
+            console.log(strs);
+            console.log(strs.raw[0] === '\\unicode and \u{55}');
+        }
+        tag`\\unicode and \u{55}`;
     }
 }
 
