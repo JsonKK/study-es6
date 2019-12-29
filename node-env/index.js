@@ -13,4 +13,4 @@ require('./3-destruction')();
 require('./4-string')();
 
 //执行第六章 正则表达式
-require('./6-regexper')();
+require('./5-regexper')();
