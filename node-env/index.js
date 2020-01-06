@@ -17,3 +17,6 @@ require('./5-regexper')();
 
 //执行第六章，数值的扩展
 require('./6-value-number')();
+
+//执行第七章，函数的扩展
+require('./7-function')();
