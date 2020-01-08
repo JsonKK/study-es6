@@ -19,4 +19,7 @@ require('./5-regexper')();
 require('./6-value-number')();
 
 //执行第七章，函数的扩展
-require('./7-function')();
+// require('./7-function')();
+
+//执行第八章，数组的扩展
+require('./8-array')();
