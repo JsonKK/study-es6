@@ -23,3 +23,6 @@ require('./6-value-number')();
 
 //执行第八章，数组的扩展
 require('./8-array')();
+
+//执行第九章，对象的扩展
+require('./9-object')();
