@@ -9,3 +9,7 @@
 //第一章变量的学习
 import {main as _variate} from './src/1-variate';
 _variate();
+
+//第十章对象的学习
+import {main as _object} from './src/10-object';
+_object();

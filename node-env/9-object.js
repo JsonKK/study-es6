@@ -56,6 +56,17 @@ var main = function(){
 
         console.log('对象上自有属性输出',Object.getOwnPropertyDescriptor(obj3,'arr'));
     }
+
+    // {
+    //     let { x, y,...z} = { x: 1, y: 2, a: 3, b: 4 };
+    //     console.log('解构赋值输出的对象:',{x,y});
+    // }
+
+    {
+        let obj =  { width: 'aaa', bar: 'bbb' }
+        let { width, foo } = obj;
+        console.log('width',width);
+    }
 }
 
 module.exports = main;
