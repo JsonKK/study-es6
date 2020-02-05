@@ -81,6 +81,23 @@ var main = function () {
 
         console.log(getArea(shapeType.triangle , {width : 100, height : 100}));
     }
+
+    {
+        //创建两个相同的symbol
+        var s1 = Symbol('s');
+        var s2 = Symbol.for('s');
+        var s3 = Symbol.for('s');
+        // 不相等
+        console.log(s1 == s2);
+        //相等
+        console.log(s3 == s2);
+    }
+
+    {
+        //测试是否存在iframe
+        let iframe = document.getElementById('iframe');
+        console.log('iframe内是否存在定义的foo',iframe.contentWindow.Symbol.for('foo') === Symbol.for('foo'));
+    }
 }
 
 export { main }
