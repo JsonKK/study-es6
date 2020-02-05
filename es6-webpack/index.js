@@ -13,3 +13,7 @@ _variate();
 //第十章对象的学习
 import {main as _object} from './src/10-object';
 _object();
+
+//第十二章特殊标识学习
+import {main as _symbol} from './src/12-symbol';
+_symbol();

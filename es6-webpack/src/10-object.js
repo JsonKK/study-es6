@@ -80,7 +80,38 @@ var main = function(){
     }
 
     {
-        //obje
+        //object.is
+        console.info('使用object.is()判断字符串',Object.is('foo','foo'));
+        console.info('判断正负0是否相等',Object.is(+0,-0));
+        //判断非数值是否相等
+        console.info('判断非数值是否相等',Object.is(1/0,2/0));
+
+
+        //Object.assign方法
+        //布尔值和数值无法合并
+        let v1 = 'abc';
+        let v2 = true;
+        let v3 = 10;
+        console.info('合并多种类型测试',JSON.stringify(Object.assign({},v1,v2,v3)));
+
+    }
+
+    {
+        //Object.entries
+        let obj = {one:1,two:2};
+        for(let[k,v] of Object.entries(obj)){
+            console.log(
+                `${JSON.stringify(k)}:${JSON.stringify(v)}`
+            );
+        }
+
+        //Object.formEntries
+        let arrObj = [
+            ['one',1],
+            ['two',2]
+        ];
+        // console.log(Object.fromEntries);
+        // console.log('数组:%s转为对象:%s',arrObj,Object.fromEntries(arrObj));
     }
 }
 
