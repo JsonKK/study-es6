@@ -50,7 +50,7 @@ var main = function () {
         obj[a] = 3;
         const PROP_NAME = Symbol('pr');
         const PROP_AGE = Symbol('age');
-        obj[PROP_NAME]= "一斤代码" ; 
+        obj[PROP_NAME]= "哈哈哈！" ; 
         obj[PROP_AGE] = 18 
         document.getElementById('symbol').innerHTML = obj[PROP_NAME];
         Object.getOwnPropertySymbols(obj).forEach(function(o){
@@ -83,19 +83,28 @@ var main = function () {
         console.log(getArea(shapeType.triangle , {width : 100, height : 100}));
     }
 
-
-
-
-
-
-
-
-
     {   
         //global._foo 被预先定义，得到了失真的脚本
         global._foo = {foo : 'world'};
         const a = require('./test');
         console.log(a.foo);
+    }
+    
+    {
+        //创建两个相同的symbol
+        var s1 = Symbol('s');
+        var s2 = Symbol.for('s');
+        var s3 = Symbol.for('s');
+        // 不相等
+        console.log(s1 == s2);
+        //相等
+        console.log(s3 == s2);
+    }
+
+    {
+        //测试是否存在iframe
+        let iframe = document.getElementById('iframe');
+        console.log('iframe内是否存在定义的foo',iframe.contentWindow.Symbol.for('foo') === Symbol.for('foo'));
     }
 }
 
