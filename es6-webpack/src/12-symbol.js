@@ -49,7 +49,7 @@ var main = function () {
         obj[a] = 3;
         const PROP_NAME = Symbol('pr');
         const PROP_AGE = Symbol('age');
-        obj[PROP_NAME]= "一斤代码" ; 
+        obj[PROP_NAME]= "哈哈哈！" ; 
         obj[PROP_AGE] = 18 
         document.getElementById('symbol').innerHTML = obj[PROP_NAME];
         Object.getOwnPropertySymbols(obj).forEach(function(o){
