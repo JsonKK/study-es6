@@ -1,3 +1,4 @@
+
 var main = function () {
 
     {
@@ -80,6 +81,21 @@ var main = function () {
         }
 
         console.log(getArea(shapeType.triangle , {width : 100, height : 100}));
+    }
+
+
+
+
+
+
+
+
+
+    {   
+        //global._foo 被预先定义，得到了失真的脚本
+        global._foo = {foo : 'world'};
+        const a = require('./test');
+        console.log(a.foo);
     }
 }
 
