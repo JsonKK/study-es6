@@ -67,6 +67,20 @@ var main = function(){
         let { width, foo } = obj;
         console.log('width',width);
     }
+
+    {
+        let num = 999;
+        let count = 0;
+
+        do
+        {
+            count++;
+            num = parseInt(num/10); 
+        }
+        while(num >0);
+
+        console.log("它是个" + count + "位的数！");
+    }
 }
 
 module.exports = main;
