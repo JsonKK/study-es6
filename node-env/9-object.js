@@ -81,6 +81,15 @@ var main = function(){
 
         console.log("它是个" + count + "位的数！");
     }
+
+    {
+        //使用is方法
+        console.log('NaN === NaN:',NaN === NaN);
+        console.log('Object.is(NaN,NaN)',Object.is(NaN,NaN));
+
+        console.log('+0 === -0',+0 === -0);
+        console.log('Object.is(+0,-0)',Object.is(+0,-0));
+    }
 }
 
 module.exports = main;

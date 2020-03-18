@@ -1,5 +1,5 @@
-var main = function(){
-
+import _ from 'underscore';
+(function(){
     {
         //简写写法在打印对象时也很有用
         let user = {
@@ -113,6 +113,54 @@ var main = function(){
         // console.log(Object.fromEntries);
         // console.log('数组:%s转为对象:%s',arrObj,Object.fromEntries(arrObj));
     }
-}
 
-export {main};
+    {
+        const proto = {
+            x: 'hello',
+            foo() {
+                console.log(this.x);
+                return this.x;
+            },
+        };
+        
+        const obj = {
+            x: 'world',
+            foo() {
+                return super.foo();
+            }
+        };
+
+        //为什么o返回的是空对象,但可以输出o.x
+        let o = Object.create(obj);
+        console.log(`o是否为空对象:${_.isEmpty(o)}`,`输出o.x:${o.x}`);
+        console.log(`o是否为obj的继承:${Object.getPrototypeOf(o) === obj}`);
+        console.log(`obj是否为o的继承:${Object.getPrototypeOf(obj) === o}`);
+        Object.setPrototypeOf(obj, proto);
+        //指向的是proto的foo方法,但是原型还是obj,返回的是原型上的x
+        console.log(`使用super对象输出:${obj.foo()}`);
+    }
+
+    {
+        //__proto__的使用
+        const breakfast = {
+            getDrink(){
+                return 'milk';
+            }
+        }
+
+        const dinner = {
+            getDrink(){
+                return 'tea';
+            }
+        }
+
+        //把breakfast复制到sunday的实例上
+        let sunday = {
+            __proto__ : breakfast
+        }
+        console.log(`判断sunday是否是breakfast的继承:${Object.getPrototypeOf(sunday) === breakfast}`);
+        //把dinner赋值到sunday
+        sunday.__proto__ = dinner;
+        console.log(`判断sunday是否是dinner的继承:${Object.getPrototypeOf(sunday) === dinner}`);
+    }
+})()

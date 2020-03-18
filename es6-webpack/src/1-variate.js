@@ -1,5 +1,4 @@
-export function main(){
-
+(function(){
     {
         // 重复定义变量
         function f(){
@@ -50,6 +49,4 @@ export function main(){
             arr2[2]()
         ]);
     }
-    
-
-}
+})()
