@@ -70,7 +70,9 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
+    "emoji-regex": "^8.0.0",
     "eslint-config-mysticatea": "^12.0.0",
+    "node-emoji": "^1.10.0",
     "os": "^0.1.1"
   }
 }

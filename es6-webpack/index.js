@@ -23,6 +23,5 @@ import  './src/10-object';
 // import {main as _symbol} from './src/12-symbol';
 // _symbol();
 
-// //第十三章set 和 map方法
-// import {main as _setMap} from './src/13-set&map';
-// _setMap();
+//第十三章set 和 map方法
+import './src/13-set&map';
