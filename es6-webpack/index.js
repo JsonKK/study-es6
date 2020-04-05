@@ -7,7 +7,9 @@
 // test()
 
 //第一章变量的学习
-import {main as _variate} from './src/1-variate';
+import {base as _variate} from './src/1-variate';
+_variate.main();
+console.log('_variate',_variate);
 
 //字符串学习
 //直接引入自执行文件顺序比其他文件都高

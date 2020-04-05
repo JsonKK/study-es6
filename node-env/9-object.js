@@ -1,4 +1,8 @@
+var utils = require('./utils/utils.js');
+var _ = require('lodash');
+
 var main = function(){
+    utils.isObject({});
     {
         const cart = {
             _wheels : 4,
@@ -89,6 +93,49 @@ var main = function(){
 
         console.log('+0 === -0',+0 === -0);
         console.log('Object.is(+0,-0)',Object.is(+0,-0));
+    }
+
+    {
+        // 实现浅拷贝
+        function cloneObj(){
+            let obj = {};
+            if(arguments[0] && utils.isObject(arguments[0])){
+               for(let i in arguments[0]){
+                   obj[i] = arguments[0][i]
+               } 
+            }
+            return obj;
+        }
+
+        let obj = {
+            a : 'hello',
+            b : {
+                a : 'world',
+                b : 21
+            },
+            c : ['Bob','Tom','Jenney'],
+            d : function(){
+                alert('hello world')
+            }
+        }
+
+        let cObj = utils.deepClone(obj,{b:{c:24}})
+        console.log('深拷贝后的值',JSON.stringify(cObj.b));
+        var obj1 = { body: { a: 10 } };
+        var obj2 = { body: obj1.body };
+        obj2.body.a = 20;
+        console.log(obj1.body.a);
+    }
+
+    {
+        //objcet.asssign 进行的是浅拷贝，拷贝的对象是属性的引用，而不是对象的本身
+        let obj = {
+            a : { a : 'kobe',b : 39}
+        };
+        let obj2 = {a : {c : 'james'}};
+        let initalObj = Object.assign({},obj,obj2);
+        initalObj.a.a = 'wade';
+        console.log('initalObj',JSON.stringify(initalObj));
     }
 }
 

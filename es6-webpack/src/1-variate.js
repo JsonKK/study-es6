@@ -1,4 +1,4 @@
-(function(){
+var main = function(){
     {
         // 重复定义变量
         function f(){
@@ -49,4 +49,7 @@
             arr2[2]()
         ]);
     }
-})()
+}
+
+
+export  var base = {main};
