@@ -25,3 +25,6 @@ import  './src/10-object';
 
 //第十三章set 和 map方法
 import './src/13-set&map';
+
+// 第十四章迭代器方法
+import './src/17-iterator';
