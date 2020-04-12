@@ -1,5 +1,6 @@
 var utils = require('./utils/utils.js');
 var _ = require('lodash');
+const fs = require('fs');
 
 var main = function(){
     utils.isObject({});
@@ -136,6 +137,17 @@ var main = function(){
         let initalObj = Object.assign({},obj,obj2);
         initalObj.a.a = 'wade';
         console.log('initalObj',JSON.stringify(initalObj));
+    }
+
+    {
+        // 通过 nodejs 判断同级目录下的 ’ykt.json’文件是否存在，若存在则用同步的方式打开文件并在末尾追加任意数据，请写出具体代码
+        fs.readFile('./ykt.json',function(error,data){
+            if(error){
+                console.log(error);
+
+            }
+            console.log(data);
+        })
     }
 }
 
