@@ -38,7 +38,10 @@ module.exports = {
 				loader: 'html-loader'
 			}, {
 				test: /\.js$/,
-				loader: 'babel-loader'
+				loader: 'babel-loader',
+				query: {
+					presets: ['latest'] //按照最新的ES6语法规则去转换
+				}
 			}]
 	},
 	plugins: [
