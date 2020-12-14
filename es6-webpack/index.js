@@ -27,6 +27,9 @@
 //第十三章set 和 map方法
 // import './src/13-set&map';
 
+// 第十六章promise
+import './src/16-promise';
+
 // 第十四章迭代器方法
 // import './src/17-iterator';
 
@@ -34,4 +37,4 @@
 // import './src/18-generator';
 
 //异步方法的使用
-import './src/19-async';
+// import './src/19-async';

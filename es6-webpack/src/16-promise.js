@@ -51,4 +51,25 @@
             console.log(r);
         });
     }
+
+    {
+        //测试多个promise调用
+        let test = function(){
+            return new Promise((resolve)=>{
+                setTimeout(()=>{
+                    resolve('这是一个测试被调用许多次的promise')
+                },500);
+            })
+        }
+        test().then((res)=>{
+            console.log(res)
+        })
+        test().then((res)=>{
+            console.log(res)
+        })
+        test().then((res)=>{
+            console.log(res)
+        })
+
+    }
 })()

@@ -2,3 +2,4 @@ node_modules
 logs
 .svn
 .idea
+es6-webpack/package-lock.json
