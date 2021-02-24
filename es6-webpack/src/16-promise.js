@@ -57,7 +57,8 @@
         let test = function(){
             return new Promise((resolve)=>{
                 setTimeout(()=>{
-                    resolve('这是一个测试被调用许多次的promise')
+                    let randomNum = parseInt(Math.random() * 10);
+                    resolve('这是一个测试被调用许多次的promise' + randomNum);
                 },500);
             })
         }
