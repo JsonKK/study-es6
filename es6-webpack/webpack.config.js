@@ -11,7 +11,6 @@ function getIPAdress() {
 		for (var i = 0; i < iface.length; i++) {
 			var alias = iface[i];
 			if (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal) {
-				console.log(alias.address);
 				return alias.address;
 			}
 		}
@@ -28,7 +27,7 @@ module.exports = {
 		hot: true,
 		compress: true,
 		port: 9000,
-		host: '0.0.0.0',
+		host,
 		clientLogLevel: "none",
 		quiet: true
 	},

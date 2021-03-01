@@ -21,14 +21,14 @@
 // import  './src/10-object';
 
 // //第十二章特殊标识学习
-// import {main as _symbol} from './src/12-symbol';
-// _symbol();
+import {main as _symbol} from './src/12-symbol';
+_symbol();
 
 //第十三章set 和 map方法
 // import './src/13-set&map';
 
 // 第十六章promise
-import './src/16-promise';
+// import './src/16-promise';
 
 // 第十四章迭代器方法
 // import './src/17-iterator';
