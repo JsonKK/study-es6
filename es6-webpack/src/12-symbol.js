@@ -166,6 +166,124 @@ var main = function () {
         console.log(2 instanceof foo);
         console.log(foo instanceof Foo)
     }
+
+    {
+        // 测试改变对象的instance
+        //对象的instanceof是不能改变的
+        // Object.prototype[Symbol.hasInstance] = function(num){
+        //     console.log('xixihaha')
+        //     return Number(num) % 2 === 0;
+        // }
+
+        // console.log(2 instanceof Object);
+    }
+
+    {
+        // 与concat结合使用
+        let arr = [3,4];
+        // [1, 2, 3, 4, 5] 默认是展开的
+        console.log([1,2].concat(arr,5));
+        // 设置 Symbol.isConcatSpreadable 为false时候，数组是不展开的
+        arr[Symbol.isConcatSpreadable] = false;
+        //[1, 2, Array(2), 5]
+        console.log([1,2].concat(arr,5));
+
+        // 在类中使用
+        class A1 extends Array{
+            constructor(args){
+                // 暂时不知道super是什么含义
+                super(args);
+                this[Symbol.isConcatSpreadable] = true;
+            }
+        }
+
+        class A2 extends Array{
+            constructor(args){
+                super(args);
+                this[Symbol.isConcatSpreadable] = false;
+            }
+        }
+
+        let a1 = new A1();
+        a1[0] = 1;
+        a1[1] = 2;
+        let a2 = new A2();
+        a2[0] = 3;
+        a2[1] = 4;
+        //[0, 1, 2, Array(2)] a2 设置了symbol.isConcatSpreadable 为false所以不展开
+        console.log([0].concat(a1).concat(a2));
+    }
+
+    {   
+        //实例对象在运行过程中，需要再次调用自身的构造函数时，会调用该属性指定的构造函数。它主要的用途是，有些类库是在基类的基础上修改的，那么子类使用继承的方法时，作者可能希望返回基类的实例，而不是子类的实例。
+        // 修改衍生对象
+        class MyArray extends Array{
+            static get [Symbol.species](){
+                return Array
+            }
+        }
+
+        const a = new MyArray();
+        const b = a.map(x => x);
+        // 修改了实例衍生
+        // a 不是 MyArray实例，而是Array实例
+        console.log(a instanceof MyArray);
+        console.log(b instanceof MyArray);
+        console.log(b instanceof Array);
+    }
+
+    {
+        //symbol.match使用
+        // 当执行str.match(myObject)时，如果该属性存在，会调用它，返回该方法的返回值。
+        class myObject{
+            [Symbol.match](string){
+                return 'hellow world'.indexOf(string) > -1 ? string : null;
+            }
+        }
+        //改写后的match方法
+        console.log('e'.match(new myObject()));
+    }
+
+    {
+        // 重写replace
+        const x = {};
+        x[Symbol.replace] = function(...args){
+            return args[0] + args[1];
+        }
+
+        console.log('hello'.replace(x,'world'));
+
+    }
+
+    {
+        class MySearch{
+            constructor(value){
+                //存储实例化时候的值
+                this.vaule = value;
+            }
+            [Symbol.search](string){
+                return string.indexOf(this.value);
+            }
+        }
+
+        console.log('foobar'.search(new MySearch('foo')));
+    }
+
+    {
+        // 定制[object xxx]
+        //Symbol.toStringTag
+        class Collect{
+
+            get [Symbol.toStringTag](){
+                // return typeof string == 'string' ? string : 'xxx';
+                return 'xxx';
+            }
+        }
+        let collect = new Collect();
+        let arr = JSON.parse('{"a":"123"}');
+        console.log(Object.prototype.toString.call(collect));
+        console.log(arr[Symbol.toStringTag])
+    }
 }
 
 export { main }
