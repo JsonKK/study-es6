@@ -25,7 +25,10 @@
 // _symbol();
 
 //第十三章set 和 map方法
-import './src/13-set&map';
+// import './src/13-set&map';
+
+//第十四章代理器方法
+import './src/14-proxy';
 
 // 第十六章promise
 // import './src/16-promise';
