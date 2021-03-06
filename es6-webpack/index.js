@@ -28,7 +28,10 @@
 // import './src/13-set&map';
 
 //第十四章代理器方法
-import './src/14-proxy';
+// import './src/14-proxy';
+
+//第十五章对象的反映
+import './src/15-reflect';
 
 // 第十六章promise
 // import './src/16-promise';

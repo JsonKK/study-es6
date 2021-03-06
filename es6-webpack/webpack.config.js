@@ -11,6 +11,7 @@ function getIPAdress() {
 		for (var i = 0; i < iface.length; i++) {
 			var alias = iface[i];
 			if (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal) {
+				console.log('server is open in ' + alias.address);
 				return alias.address;
 			}
 		}
