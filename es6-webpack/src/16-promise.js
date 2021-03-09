@@ -4,8 +4,8 @@
 //第三，当处于pending状态时，无法得知目前进展到哪一个阶段（刚刚开始还是即将完成）。
 (function(){
     {
-        function sleep(ms){
-            return new Promise(function(resolve,reject){
+        const sleep = function(ms){
+            return new Promise(function(resolve){
                 setTimeout(resolve,ms);
             });
         }

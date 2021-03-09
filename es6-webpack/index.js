@@ -34,10 +34,10 @@
 // import './src/15-reflect';
 
 // 第十六章promise
-import './src/16-promise';
+// import './src/16-promise';
 
 // 第十四章迭代器方法
-// import './src/17-iterator';
+import './src/17-iterator';
 
 //引入生成器
 // import './src/18-generator';
