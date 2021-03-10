@@ -37,10 +37,10 @@
 // import './src/16-promise';
 
 // 第十四章迭代器方法
-import './src/17-iterator';
+// import './src/17-iterator';
 
 //引入生成器
-// import './src/18-generator';
+import './src/18-generator';
 
 //异步方法的使用
 // import './src/19-async';
