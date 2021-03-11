@@ -249,5 +249,37 @@
     
   }
 
+  {
+    //实现状态开关
+    let isLoading = false;
+    const clock = function* (){
+      while(true){
+        isLoading = !isLoading;
+        console.log('isLoading ? ',isLoading);
+        yield;
+      }
+    }
+
+    clock().next();
+    clock().next();
+  }
+
+  {
+    // 部署iterator函数
+    const iterEntries = function* (obj){
+      let keys = Object.keys(obj);
+      for(let i=0,lang=keys.length;i<lang;i++){
+        let key = keys[i];
+        yield [key,obj[key]];
+      }
+    }
+
+    let myObj = { foo: 3, bar: 7 };
+
+    for (let [key, value] of iterEntries(myObj)) {
+      console.log('iterEntries',`[${key}, ${value}]`);
+    }
+  }
+
   console.log('nextId',nextId.next());
 })()
