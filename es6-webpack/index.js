@@ -43,4 +43,7 @@
 // import './src/18-generator';
 
 //异步方法的使用
-import './src/19-async';
+// import './src/19-async';
+
+// 类
+import './src/20-class';

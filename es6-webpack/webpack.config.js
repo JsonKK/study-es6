@@ -23,6 +23,7 @@ module.exports = {
 		index: ['babel-polyfill', './index.js'],
 		iframe: ['babel-polyfill', './iframe.js']
 	},
+	devtool: 'inline-source-map',
 	devServer: {
 		contentBase: './dist',
 		hot: true,
