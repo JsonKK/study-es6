@@ -165,7 +165,7 @@ import _ from 'underscore';
     }
 
     {
-        function getFoo() {
+        const getFoo = function() {
             return new Promise(function (resolve, reject) {
                 resolve('foo');
             });
@@ -180,20 +180,20 @@ import _ from 'underscore';
             }
         };
 
-        function run(generator) {
+        const run = function(generator) {
             const it = generator();
 
             function go(result) {
                 if (result.done) return result.value;
 
                 return result.value.then(function (value) {
-                    return go(it.next(value));
+                    go(it.next(value));
                 }, function (error) {
-                    return go(it.throw(error));
+                    go(it.throw(error));
                 });
             }
 
-            go(it.next());
+            console.log(go(it.next()));
         }
 
         run(g);
@@ -201,7 +201,7 @@ import _ from 'underscore';
     }
 
     {
-        function timeout(ms) {
+        const timeout = function(ms) {
             return new Promise((resolve, reject) => {
                 setTimeout(resolve, ms, 'done');
             });
@@ -214,13 +214,13 @@ import _ from 'underscore';
     }
 
     {   
-        function getStockSymbol(name){
+        const getStockSymbol = function(name){
             return name+'12123333';
         }
-        function getStockPrice(price){
+        const getStockPrice = function(price){
             return price;
         }
-        async function getStockPriceByName(name) {
+        const getStockPriceByName = async function(name) {
             const symbol = await getStockSymbol(name);
             const stockPrice = await getStockPrice(symbol);
             return stockPrice;

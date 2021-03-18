@@ -10,12 +10,7 @@
         let dessert = 'cake';
         let drink = 'coffee';
 
-        kitchen`今天早餐是${dessert}与${drink}!`;
-        kitchen``;
-        kitchen`这是一段纯文本`;
-        kitchen`<p>这是一段包含标签的文本</p>`;
-
-        function kitchen(strings,...value){
+        const kitchen = function(strings,...value){
             // console.log('strings',strings);
             // console.log('...value',value);
             let result = '';
@@ -27,6 +22,13 @@
             result += strings[strings.length-1];
             console.log('模板字符串通过方法输出:',result);
         }
+
+        kitchen`今天早餐是${dessert}与${drink}!`;
+        kitchen``;
+        kitchen`这是一段纯文本`;
+        kitchen`<p>这是一段包含标签的文本</p>`;
+
+        
 
         //判断字符是否以某个字符开头
         console.log('字符串是否以某个字符开头-',`${drink}是否以co开头：${drink.startsWith('co')}`);

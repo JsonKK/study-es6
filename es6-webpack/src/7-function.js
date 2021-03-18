@@ -10,8 +10,7 @@ import _ from 'underscore';
     
     {
         //新增函数的name属性
-        function reset(){
-        }
+        const reset = function(){}
         var r = reset;
         if(_.isFunction(r)){
             console.log('输出函数的name方法',r.name);
@@ -24,7 +23,7 @@ import _ from 'underscore';
 
     {
         //使用解构获取参数
-        function reset({location,user='灭霸'}={location:'中国',user:'jsonKK'}){
+        const reset = function({location,user='灭霸'}={location:'中国',user:'jsonKK'}){
             console.log('使用解构获取函数参数location:',location);
             console.log('使用解构获取函数参数user:',user);
         }

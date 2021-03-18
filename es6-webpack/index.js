@@ -18,7 +18,7 @@
 // import './src/7-function';
 
 // //第十章对象的学习
-// import  './src/10-object';
+import  './src/10-object';
 
 // //第十二章特殊标识学习
 // import {main as _symbol} from './src/12-symbol';
@@ -46,4 +46,4 @@
 // import './src/19-async';
 
 // 类
-import './src/20-class';
+// import './src/20-class';

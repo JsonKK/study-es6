@@ -1,16 +1,18 @@
+
+// 重复定义变量
+function f(){
+    console.log('重复定义变量','this is outside');
+}
+
 var main = function(){
-    {
-        // 重复定义变量
-        function f(){
-            console.log('重复定义变量','this is outside');
-        }
+    {   
         (function(){
+            // 内部的覆盖了外部的
             function f(){
                 console.log('重复定义变量','this is inside');
             }
-            if(false){}
             f();
-        })()
+        })();
     }
 
     {
@@ -48,6 +50,14 @@ var main = function(){
             arr2[1](),
             arr2[2]()
         ]);
+    }
+
+    {
+        const foo = Object.freeze({});
+
+        // 常规模式时，下面一行不起作用；
+        // 严格模式时，该行会报错
+        //foo.prop = 123;
     }
 }
 

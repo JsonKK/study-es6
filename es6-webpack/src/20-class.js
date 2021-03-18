@@ -188,6 +188,84 @@
   }
 
   
+  {
+    class A {
+      constructor() {
+        this.p = 2;
+      }
+    }
+    
+    class B extends A {
+      //在子类普通方法中通过super调用父类的方法时，方法内部的this指向当前的子类实例。
+      // 所以此时的super.p 相当于this.p
+      get m() {
+        return super.p;
+      }
+    }
+    
+    let b = new B();
+    console.log('子类无法通过super直接获取到父类的属性',b.m )
+  }
 
+  {
+    //属性定义在类的prototype上的话，可以被super获取到
+    class A{}
+    A.prototype.p = '定义属性在prototype上，子类通过super获取父类属性';
+
+    class B extends A{
+      get m(){
+        return super.p;
+      }
+    }
+
+    let b = new B();
+    console.log(b.m);
+  }
+
+  {
+    // 静态方法指向的是类，而不是实例
+    class A{
+      constructor(){
+        this.x = '父类A';
+      }
+      static print(){
+        return this.x;
+      }
+    }
+
+    class B extends A{
+      constructor(){
+        // ES6 要求，子类的构造函数必须执行一次 super 函数，否则会报错。
+        super();
+        this.x = '子类B';
+      }
+      static m(){
+        super.print();
+      }
+    }
+
+    B.x = '子类B新值';
+    //目前无法定义静态属性，所以静态属性值无法获取到
+    console.log(B.m());
+
+  }
+
+  {
+    const A = {
+      a : '1',
+      b : {
+        c : 2
+      }
+    }
+
+    const B = {
+      b : {
+        d : 3
+      }
+    }
+
+    // const C = {...A,...B};
+    // console.log(C);
+  }
 
 })()
