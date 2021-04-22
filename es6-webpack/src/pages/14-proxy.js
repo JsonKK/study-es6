@@ -38,7 +38,7 @@
   }
 
   {
-    function createArray(...elements) {
+    const createArray = function(...elements) {
       let handler = {
         get(target, propKey, receiver) {
           let index = Number(propKey);
@@ -228,6 +228,57 @@
       }
     });
     //this is not a Date object. 报错
-    console.log(proxy.getDate());
+    console.log('proxy.getDate',proxy.getDate());
+  }
+
+  {
+    const fn = function(left, right){
+      console.log('i am fn');
+      return left + right;
+    }
+    const obj = new Proxy(fn,{
+      get(target,propKey,receiver){
+        console.log('get');
+        return Reflect.get(target,propKey,receiver);
+      },
+      set(target,propKey,value,receiver){
+        console.log('set');
+        return Reflect.set(target,propKey,value,receiver);
+      },
+      apply(target, thisBinding, args){
+        console.log('apply',thisBinding,args);
+        return Reflect.apply(...arguments);
+      },
+      //拦截作为构造函数调用
+      //并不知道如何触发
+      construct(target, args){
+        console.log('construct',target,args);
+        return new target(...args);
+      }
+    })
+
+    //会被apply方法拦截
+    //执行步骤
+    // 1.被apply拦截
+    // 2.执行fn方法
+    // 3.返回执行结果
+    // 4.得到的数据为函数返回值
+    // console.log(obj(1,2));
+
+    //执行步骤
+    // 1.先被get拦截
+    // 2.被apply拦截
+    // 3.执行fn函数
+    // 4.返回函数值
+    // 5.copyObj 为fn返回的值
+    // const copyObj = obj.call({name:'xixihaha'},1,2);
+    // console.log(copyObj)
+
+    //执行步骤
+    // 1.先被construct拦截器拦截
+    // 2.再执行fn方法
+    // 3.copyFn为一个对象
+    // const copyFn = new obj();
+    // console.log(copyFn);
   }
 })()

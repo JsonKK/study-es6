@@ -30,7 +30,7 @@ module.exports = {
 		compress: true,
 		port: 9000,
 		host,
-		clientLogLevel: "none",
+		clientLogLevel: 'none',
 		quiet: true
 	},
 	module: {
@@ -60,5 +60,13 @@ module.exports = {
 	output: {
 		filename: '[name].js',
 		path: __dirname + '/dist'
+	},
+	resolve : {
+		extensions : ['.js','.jsx','.json'],
+		alias : {
+			'@' : path.join(__dirname,'./src'), 
+			'@pages' : path.join(__dirname,'./src/pages'),
+			'@assets' : path.join(__dirname,'./src/assets')
+		}
 	}
 };
