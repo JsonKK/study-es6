@@ -153,14 +153,21 @@ const initOriginal = function () {
 
 // 调试自主封装的promise
 const initSelf = function(){
-	{
+	{	console.log(1);
 		const fn = function(){
 			return new myPromise((resolve,reject)=>{
-				resolve();
+				console.log(2);
+				setTimeout(()=>{
+					resolve('join in');
+				})
+				
 			})
 		}
-
-		fn();
+		fn().then((value)=>{
+			console.log('value',value);
+		});
+		console.log(3);
+		
 	}
 }
 

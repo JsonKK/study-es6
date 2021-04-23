@@ -54,8 +54,38 @@ class Promise {
     }
   }
 
-  then(nResolved, onRejected){
-    
+  then(onResolved, onRejected){
+    const that = this;
+    // 如果onResolved不是函数
+    if(typeof onResolved !== 'function'){
+      onResolved = (value) => value;
+    }
+
+    if(typeof onRejected !== 'function'){
+      onRejected = (reason) => { throw reason};
+    }
+
+    //如果状态为解决
+    if(that.currentState === RESOLVED){
+      onResolved(that.value);
+    }
+
+    //如果状态为拒绝
+    if(that.currentState === REJECTED){
+      onRejected(that.value);
+    }
+
+    //如果状态为等待中
+    if(that.currentState === PENDING){
+      that.resolvedCallbacks.push(()=>{
+        onResolved(that.value);
+      })
+
+      that.rejectedCallbacks.push(()=>{
+        onRejected(that.value);
+      })
+    }
+
   }
 }
 
