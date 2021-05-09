@@ -12,7 +12,7 @@ class Promise {
     }
     //初始化状态为等待
     that.currentState = PENDING;
-    //初始化回调值为空
+    //初始化终值为空
     that.value = undefined;
     //用于保存then的缓存回调函数，只有当promise状态为pending的时候才能缓存
     that.resolvedCallbacks = [];

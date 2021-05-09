@@ -66,7 +66,8 @@ module.exports = {
 		alias : {
 			'@' : path.join(__dirname,'./src'), 
 			'@pages' : path.join(__dirname,'./src/pages'),
-			'@assets' : path.join(__dirname,'./src/assets')
+			'@assets' : path.join(__dirname,'./src/assets'),
+			'@demo' : path.join(__dirname,'./src/demo')
 		}
 	}
 };

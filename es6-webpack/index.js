@@ -27,8 +27,8 @@
 // import '@pages/15-reflect';
 
 // 第十六章promise
-import {initSelf} from '@pages/16-promise';
-initSelf();
+// import {initSelf} from '@pages/16-promise';
+// initSelf();
 
 // 第十四章迭代器方法
 // import '@pages/17-iterator';
@@ -41,3 +41,7 @@ initSelf();
 
 // 类
 // import '@pages/20-class';
+
+// js中的继承
+import '@demo/inherit.js';
+
