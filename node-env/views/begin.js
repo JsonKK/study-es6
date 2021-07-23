@@ -1,6 +1,6 @@
 import * as constants from './constants.js';
 import {B} from './constants';
-var utils = require('./utils/utils.js');
+var utils = require('../utils/utils.js');
 // import utils from './utils/utils.js';
 
 var begin = function(){

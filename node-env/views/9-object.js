@@ -1,4 +1,4 @@
-var utils = require('./utils/utils.js');
+var utils = require('../utils/utils.js');
 var _ = require('lodash');
 const fs = require('fs');
 

@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "strict": true, 
+    "noImplicitAny": false,
+    "module": "commonjs",
+    "removeComments": true,//编译过程去掉注释
+    "sourceMap": false, //打包完成 .js.map文件
+    "rootDir" : "./src", //打包文件目录
+    "outDir": "./build",//你要生成js的目录
+    "baseUrl": "./src",
+    "paths": {
+      "*" : ["types/*"]
+    }
+  },
+  "include" :[
+    "./src/*.ts",
+    "./src/*.d.ts",
+    "./src/**/*.ts",
+    "./src/**/*.d.ts",
+    "./src/**/**/*.d.ts",
+  ]
+}

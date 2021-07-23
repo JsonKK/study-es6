@@ -1,4 +1,4 @@
-var utils = require('./utils/utils.js');
+var utils = require('../utils/utils.js');
 var main = function () {
     //单一数组去重
     let set = new Set([1, 2, 4, 2, 6, 3, 3, 8, 6, 7, 4, 5]);

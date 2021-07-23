@@ -1,3 +1,4 @@
+import './src/assets/css/main.css';
 
 //第一章变量的学习
 // import {base as _variate} from '@pages/1-variate';
@@ -43,5 +44,9 @@
 // import '@pages/20-class';
 
 // js中的继承
-import '@demo/inherit.js';
+// import '@demo/inherit.js';
+
+//深入理解
+import {DeepArray} from '@demo/deep-array.ts';
+new DeepArray();
 

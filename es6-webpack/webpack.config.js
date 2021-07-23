@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+// const ExtractTextPlugin = require("extract-text-webpack-plugin");
 var os = require('os');
 function getIPAdress() {
 	var interfaces = os.networkInterfaces();
@@ -34,6 +34,17 @@ module.exports = {
 		quiet: true
 	},
 	module: {
+		rules: [
+			{
+				test: /\.tsx?$/,
+				use: 'ts-loader',
+				exclude: /node_modules/,
+			},
+			{
+				test:/\.css$/,
+				use:['style-loader','css-loader']
+			}
+		],
 		loaders: [
 			{
 				test: /\.html$/,
@@ -44,7 +55,8 @@ module.exports = {
 				query: {
 					presets: ['latest'] //按照最新的ES6语法规则去转换
 				}
-			}]
+			}
+		]
 	},
 	plugins: [
 		new CleanWebpackPlugin(['dist']),
@@ -62,7 +74,7 @@ module.exports = {
 		path: __dirname + '/dist'
 	},
 	resolve : {
-		extensions : ['.js','.jsx','.json'],
+		extensions : ['.tsx', '.ts','.js','.jsx','.json'],
 		alias : {
 			'@' : path.join(__dirname,'./src'), 
 			'@pages' : path.join(__dirname,'./src/pages'),
