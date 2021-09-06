@@ -281,5 +281,43 @@
     }
   }
 
-  console.log('nextId',nextId.next());
+  {
+    class ListenBtnClick{
+      constructor(fn){
+        this.renderBtn();
+        this.id = 'touchMe';
+        this.fn = fn;
+      }
+      //构造dom
+      renderBtn(){
+        const btn = document.createElement('button');
+        btn.innerText = '点我呀';
+        btn.id = this.id;
+        document.body.appendChild(btn);
+        this.addEvent();
+      }
+      //增加事件
+      addEvent(){
+        const btn = document.getElementById(this.id);
+        btn.onclick = ()=>{
+          console.log('点击了')
+          this.clickBack().next();
+        }
+      }
+
+      *clickBack(){
+        for(let i =0;true;i++){
+          yield this.fn && this.fn();
+        }
+      }
+
+    }
+
+   new ListenBtnClick(()=>{
+     console.log('还是只能在回调函数中被点击事件调用，表示遗憾')
+   });
+
+  }
+
 })()
+

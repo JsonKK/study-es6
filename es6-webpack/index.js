@@ -35,7 +35,7 @@ import './src/assets/css/main.css';
 // import '@pages/17-iterator';
 
 //引入生成器
-// import '@pages/18-generator';
+import '@pages/18-generator';
 
 //异步方法的使用
 // import '@pages/19-async';
@@ -47,6 +47,6 @@ import './src/assets/css/main.css';
 // import '@demo/inherit.js';
 
 //深入理解
-import {DeepArray} from '@demo/deep-array.ts';
-new DeepArray();
+// import {DeepArray} from '@demo/deep-array.ts';
+// new DeepArray();
 
