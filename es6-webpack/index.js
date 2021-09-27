@@ -28,14 +28,14 @@ import './src/assets/css/main.css';
 // import '@pages/15-reflect';
 
 // 第十六章promise
-// import {initSelf} from '@pages/16-promise';
-// initSelf();
+import {testMorePromise} from '@pages/16-promise';
+testMorePromise()
 
 // 第十四章迭代器方法
 // import '@pages/17-iterator';
 
 //引入生成器
-import '@pages/18-generator';
+// import '@pages/18-generator';
 
 //异步方法的使用
 // import '@pages/19-async';

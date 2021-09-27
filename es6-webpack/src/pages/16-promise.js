@@ -1,5 +1,4 @@
 import myPromise from '@assets/js/my-promise.js';
-import { reject } from 'underscore';
 
 
 
@@ -171,7 +170,37 @@ const initSelf = function(){
 	}
 }
 
+
+const testMorePromise = () => {
+	const localPromise = (num)=>{
+		const randomNum = Math.floor(Math.random() * 5) + 1
+		return new Promise((resolve,reject)=>{
+			if(num === randomNum){
+				reject('it is error' + num);
+			}
+			else{
+				resolve()
+			}
+		})
+	}
+
+	localPromise(1).then(()=>{
+		return localPromise(2)
+	}).then(()=>{
+		return localPromise(3)
+	}).then(()=>{
+		return localPromise(4)
+	}).then(()=>{
+		return localPromise(5)
+	}).then(()=>{
+		console.log('game pass')
+	}).catch((err)=>{
+		console.log('game over',err)
+	})
+}
+
 export {
 	initOriginal,
-	initSelf
+	initSelf,
+	testMorePromise
 }
