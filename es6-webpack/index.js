@@ -22,14 +22,14 @@ import './src/assets/css/main.css';
 // import '@pages/13-set&map';
 
 //第十四章代理器方法
-// import '@pages/14-proxy';
+import '@pages/14-proxy';
 
 //第十五章对象的反映
 // import '@pages/15-reflect';
 
 // 第十六章promise
-import {testMorePromise} from '@pages/16-promise';
-testMorePromise()
+// import {testMorePromise} from '@pages/16-promise';
+// testMorePromise()
 
 // 第十四章迭代器方法
 // import '@pages/17-iterator';
@@ -50,3 +50,5 @@ testMorePromise()
 // import {DeepArray} from '@demo/deep-array.ts';
 // new DeepArray();
 
+// import { initPage } from './src/pages/21-fetch';
+// initPage();

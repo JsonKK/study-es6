@@ -1,3 +1,84 @@
+html {
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+html,
+body,
+header,
+section,
+footer,
+div,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+dl,
+dt,
+dd,
+ul,
+li,
+p,
+a,
+b,
+i,
+img {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  font-family: "Helvetica Neue", "Helvetica", "Heiti SC", "Droid Sans Fallback", "sans-self";
+  line-height: 1;
+  font-size: 24px;
+  background-color: #fff;
+  color: #353535;
+  user-select: none;
+}
+
+ul {
+  list-style: none;
+}
+
+a,li {
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+a{
+  color: inherit;
+}
+img {
+  width: auto;
+  max-width: 100%;
+  vertical-align: middle;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  font-size: 0;
+}
+
+input{
+  font-size: inherit;
+  border-radius: 0;
+  color: inherit;
+  vertical-align: baseline;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  background: none;
+}
+button {
+  border: none;
+  outline: none;
+}
 code,pre{
   width: fit-content;
   width:-webkit-fit-content;

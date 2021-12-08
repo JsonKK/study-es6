@@ -3,10 +3,10 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 // const ExtractTextPlugin = require("extract-text-webpack-plugin");
-var os = require('os');
+const os = require('os');
 function getIPAdress() {
 	var interfaces = os.networkInterfaces();
-	for (var devName in interfaces) {
+	for (let devName in interfaces) {
 		var iface = interfaces[devName];
 		for (var i = 0; i < iface.length; i++) {
 			var alias = iface[i];
@@ -17,19 +17,20 @@ function getIPAdress() {
 		}
 	}
 }
-var host = getIPAdress();
+const host = getIPAdress();
 module.exports = {
 	entry: {
 		index: ['babel-polyfill', './index.js'],
 		iframe: ['babel-polyfill', './iframe.js']
 	},
-	devtool: 'inline-source-map',
+	devtool: 'source-map',
 	devServer: {
+		publicPath: '/',
 		contentBase: './dist',
 		hot: true,
 		compress: true,
-		port: 9000,
-		host,
+		port: 8081,
+		host : '0.0.0.0',
 		clientLogLevel: 'none',
 		quiet: true
 	},
@@ -39,6 +40,14 @@ module.exports = {
 				test: /\.tsx?$/,
 				use: 'ts-loader',
 				exclude: /node_modules/,
+			},
+			{
+				test: /\.scss$/,
+				use: [
+						'style-loader', // 将 JS 字符串生成为 style 节点
+						'css-loader', // 将 CSS 转化成 CommonJS 模块
+						'sass-loader' // 将 Sass 编译成 CSS，默认使用 Node Sass
+				]
 			},
 			{
 				test:/\.css$/,
@@ -54,6 +63,9 @@ module.exports = {
 				loader: 'babel-loader',
 				query: {
 					presets: ['latest'] //按照最新的ES6语法规则去转换
+				},
+				options:{
+					sourceMap: true,
 				}
 			}
 		]

@@ -165,6 +165,10 @@
       static classMethod() {
         return 'hello';
       }
+
+      classMethod(){
+        return '你好';
+      }
     }
     
     class Bar extends Foo {
@@ -175,16 +179,6 @@
     }
     
     console.log('继承加super:',Bar.classMethod()) 
-  }
-
-  {
-    // 静态属性
-    class Foo {
-      //定义静态属性会报错
-      // static name = 'kk';
-    }
-    // Foo.name = 'kk';
-    // console.log('Foo的静态属性',Foo.name);
   }
 
   
@@ -251,21 +245,56 @@
   }
 
   {
-    const A = {
-      a : '1',
-      b : {
-        c : 2
+    //利用symbol定义class私有方法
+    const bar = Symbol('bar');
+    class myClass{
+      getPublicName(){
+        return '公有方法';
+      }
+
+      [bar](){
+        return '私有方法';
       }
     }
 
-    const B = {
-      b : {
-        d : 3
+    console.table([
+      {
+        title : '通过getOwnPropertyNames获取myClass方法名',
+        content : JSON.stringify(Object.getOwnPropertyNames(myClass.prototype))
+      },
+      {
+        title : '通过Reflect.ownKeys获取myClss方法名',
+        content : JSON.stringify(Reflect.ownKeys(myClass.prototype))
       }
-    }
-
-    // const C = {...A,...B};
-    // console.log(C);
+    ]);
+    
   }
+
+  //es5继承
+  function Parent(name,age){
+    this.name = name;
+    this.age = age;
+
+    console.log('es5父类被调用了');
+  }
+
+  Parent.prototype.say = function(){
+    console.log('es5父类方法say');
+  }
+
+  function Children(name,age){
+    Parent.call(this,name,age);
+    console.log('es5子类被调用');
+  }
+
+  Children.prototype = new Parent('lily','33');
+  // Children.prototype.constructor = Children;
+  Children.prototype.getName = function(){
+    return `${this.name},年龄：${this.age}`;
+  }
+
+  const children = new Children('andy',18);
+  console.log(children.getName());
+  children.say();
 
 })()

@@ -1,0 +1,12 @@
+.pic-list{
+  max-width: 920px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  grid-gap: 10px 10px;
+}
+.pic-list-item{
+  >img{
+    width: 100%;
+  }
+}

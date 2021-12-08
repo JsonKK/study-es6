@@ -48,6 +48,9 @@
     this.type = 'child';
   }
 
+  Child.prototype.constructor = Child;
+  // Child.prototype = new Parent();
+
   const caseChildOne = new Child();
   const caseChildTwo = new Child(); 
   //使用call方法解决了第一种继承带来的问题，同一个实例，占用同一个内容空间，第一个子集改变，所有子集改变的问题

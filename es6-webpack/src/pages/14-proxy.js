@@ -1,27 +1,14 @@
 (function(){
-  {
-    var obj = new Proxy({}, {
-      get: function (target, propKey, receiver) {
-        console.log(`getting ${propKey}!`);
-        return Reflect.get(target, propKey, receiver);
-      },
-      set: function (target, propKey, value, receiver) {
-        console.log(`setting ${propKey}!`);
-        return Reflect.set(target, propKey, value, receiver);
-      }
-    });
-    obj.count = 1;
-    ++obj.count;
-  }
 
   {
+
     //定义对象
-    let person = {
+    const person = {
       name : '张三'
     }
 
     // 实例proxy
-    let proxy = new Proxy(person,{
+    const proxy = new Proxy(person,{
       //定义get获取到了数据，判断如果存在person内则返回，否则抛出异常
       get(target,key){
         if(key in target){
@@ -32,16 +19,31 @@
         }
       }
     })
-
-    console.log(proxy.name);
-    console.log(proxy.age);
+    console.table([
+      {
+        title : '通过proxy获取name',
+        name : proxy.name
+      },
+      {
+        title : '通过proxy获取age',
+        content : proxy.age
+      },
+      {
+        title : '通过愿对象获取age',
+        content: person.age
+      },
+      {
+        title : '总结', 
+        content : '拦截器只能通过proxy实例操作，不能通过愿对象操作'
+      }
+    ])
   }
 
   {
     const createArray = function(...elements) {
-      let handler = {
+      const handler = {
         get(target, propKey, receiver) {
-          let index = Number(propKey);
+          const index = Number(propKey);
           if (index < 0) {
             propKey = String(target.length + index);
           }
@@ -50,13 +52,30 @@
         }
       };
     
-      let target = [];
+      const target = [];
       target.push(...elements);
       return new Proxy(target, handler);
     }
+
+    const infoMath = (index,content)=>{
+      return {
+        title : `第${index}项的值为：`,
+        content,
+        value:index
+      }
+    }
     
-    let arr = createArray('a', 'b', 'c');
-    console.log(arr[-1])
+    const arr = createArray('a', 'b', 'c');
+    const logs = [];
+    for(let i = 0; i < arr.length;i++){
+      const minus = -(i+1)
+      logs.push(infoMath(i,arr[i]));
+      logs.push(infoMath(minus,arr[minus]))
+    }
+
+    console.table(logs.sort((a,b)=>{
+      return a.value - b.value;
+    }))
   }
 
   {
@@ -65,11 +84,11 @@
       id : 'testId',
       visiteTimes : 0
     },{
-      get(target,key){
-        if(key == 'id'){
+      get(target,key,reactive){
+        if(key === 'id'){
           target.visiteTimes++;
         }
-        return target[key]
+        return Reflect.get(target,key,reactive)
       }
     });
 
@@ -79,28 +98,61 @@
   }
 
   {
-    
-    //把proxy设置到对象上查看效果
-    var object = {
-      proxy : new Proxy({name:'jsonkk',age:18},{})
-    }
-    //和直接定义的效果一样
-    console.log(object.proxy.name);
-  }
-
-  {
     //穿插object.create的用法
-    //为什么q 33读取不到
-    //为什么要设置writabl 才能修改p的值
-    let o = Object.create({q:33},{p:{value:42,writable:true}});
-    console.log(o);
-    o.p = 24;
-    console.log(o.p);
+    //创建原型为null的对象，对象上有两个属性p,q
+    //初始化属性的描述值,configurable : false ,writable : false,enumerable : false;
+    const o = Object.create(null,{p:{value:42,writable:true},q:{value:33,configurable:true}});
+    console.table([
+      {
+        title : '修改前的p',
+        content : o.p
+      },
+      {
+        title : '修改p是否成功',
+        content : (()=>{
+          const writable = Object.getOwnPropertyDescriptor(o,'p').writable;
+          if(writable){
+            o.p = 24;
+          }
+          return writable;
+        })()
+      },
+      {
+        title : '修改后的p',
+        content : o.p
+      },
+      {
+        title : '修改前的q',
+        content : o.q
+      },
+      {
+        title : '修改q是否成功',
+        content : (()=>{
+          const writable = Object.getOwnPropertyDescriptor(o,'q').writable;
+          if(!writable){
+            try{
+              Object.defineProperty(o,'q',{
+                writable : true
+              })
+            }
+            catch(err){
+              console.info(err);
+            }
+          }
+          o.q *= new Date().getSeconds();
+          return Object.getOwnPropertyDescriptor(o,'q').writable;
+        })()
+      },
+      {
+        title : '修改后的q',
+        content : o.q
+      }
+    ])
   }
 
   {
     // proxy支持的拦截操作实战
-    let proxy = new Proxy({id:'no.89757',age:'18',_name:'jsonKK'},{
+    const proxy = new Proxy({id:'no.89757',age:'18',_name:'jsonKK'},{
       // 拦截 key in target
       has(target,key){
         if(key[0] == '_'){
@@ -119,11 +171,23 @@
       }
     })
 
-    //校验has属性是否生效
-    console.log('proxy内是否有_name属性','_name' in proxy);
-    console.log('proxy内是否有id属性','id' in proxy);
-    delete proxy['id'];
-    console.log('删除id后的proxy',proxy);
+    console.table([
+      {
+        title : 'proxy内是否有_name属性',
+        content : '_name' in proxy
+      },
+      {
+        title : 'proxy内是否有id属性',
+        content : 'id' in proxy
+      },
+      {
+        title : '删除id后的proxy',
+        content : (()=>{
+          delete proxy['id'];
+          return proxy;
+        })()
+      }
+    ])
   }
 
   {
@@ -171,29 +235,33 @@
       set(target,key,value){
         if(key == 'age'){
           //判断数值是否为1-100
-          let reg = /^([1-9][0-9]{0,1}|100)$/;
+          const reg = /^([1-9][0-9]{0,1}|100)$/;
           if(!reg.test(value)){
-            let date = new Date().toUTCString();
-            target.log.push('时间：'+date+' 传入非法数据:'+value);
+            const time = new Date().toUTCString();
+            target.log.push({
+              title : '传入非法数据：' + value,
+              time
+            })
+            return false;
           }
           else{
             target[key] = value;
+            return Reflect.set(target,key,value);
           }
-          return true;
+          
         }
         //如果要修改log阻止
         else if(key == 'log'){
-          return true;
+          return false;
         }
         else{
-          target[key] = value;
-          return true;
+          return Reflect.set(target,key,value);
         }
       },
       //删除拦截
       deleteProperty(target,key){
         if(key == 'log'){
-          return true;
+          return false;
         }
         else{
           delete target[key];
@@ -205,11 +273,18 @@
     proxy.age = 99;
     proxy.age = 'hello world';
     proxy.age = undefined;
-    //无法为log赋值新的值
-    proxy.log = 'delete';
-    // 无法删除log
-    delete proxy.log;
-    console.log('proxyLog收集：',proxy.log);
+    
+    console.table(proxy.log);
+    console.table([
+      {
+        title : '为proxy.log赋新值',
+        content : (proxy.log = 'delete')
+      },
+      {
+        title : '删除proxy.log',  
+        content : delete proxy.log
+      }
+    ])
   }
 
   {
