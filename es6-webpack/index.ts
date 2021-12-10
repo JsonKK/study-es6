@@ -22,7 +22,7 @@ import './src/assets/css/main.css';
 // import '@pages/13-set&map';
 
 //第十四章代理器方法
-import '@pages/14-proxy';
+// import '@pages/14-proxy';
 
 //第十五章对象的反映
 // import '@pages/15-reflect';
@@ -41,14 +41,20 @@ import '@pages/14-proxy';
 // import '@pages/19-async';
 
 // 类
-// import '@pages/20-class';
+import '@pages/20-class';
+
+//fetch api使用
+// import '@pages/21-fetch';
+
+
+//demo案例
 
 // js中的继承
-// import '@demo/inherit.js';
+// import '@demo/inherit.ts';
 
 //深入理解
 // import {DeepArray} from '@demo/deep-array.ts';
 // new DeepArray();
 
-// import { initPage } from './src/pages/21-fetch';
-// initPage();
+//调试睡眠函数
+// import '@demo/sleep.ts';

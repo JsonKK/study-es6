@@ -86,4 +86,5 @@ code,pre{
   padding: .5em;
   line-height: 1.5;
   display: block;
+  word-break: break-all;
 }

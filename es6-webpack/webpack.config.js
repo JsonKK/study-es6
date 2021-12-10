@@ -20,7 +20,7 @@ function getIPAdress() {
 const host = getIPAdress();
 module.exports = {
 	entry: {
-		index: ['babel-polyfill', './index.js'],
+		index: ['babel-polyfill', './index.ts'],
 		iframe: ['babel-polyfill', './iframe.js']
 	},
 	devtool: 'source-map',
@@ -91,7 +91,8 @@ module.exports = {
 			'@' : path.join(__dirname,'./src'), 
 			'@pages' : path.join(__dirname,'./src/pages'),
 			'@assets' : path.join(__dirname,'./src/assets'),
-			'@demo' : path.join(__dirname,'./src/demo')
+			'@demo' : path.join(__dirname,'./src/demo'),
+			'@utils' : path.join(__dirname,'./src/utils')
 		}
 	}
 };

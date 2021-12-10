@@ -9,15 +9,28 @@
     "rootDir" : "./src", //打包文件目录
     "outDir": "./build",//你要生成js的目录
     "baseUrl": "./src",
+    "types": [
+      "webpack-env",
+      "node"
+    ],
     "paths": {
-      "*" : ["types/*"]
+      "@/*": ["src/*"],
+      "@utils/*": [
+        "src/utils/*"
+      ],
+      "@demo/*": [
+        "src/demo/*"
+      ]
     }
   },
   "include" :[
-    "./src/*.ts",
-    "./src/*.d.ts",
-    "./src/**/*.ts",
-    "./src/**/*.d.ts",
-    "./src/**/**/*.d.ts",
+    "src/*.ts",
+    "src/*.d.ts",
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "types"
+  ],
+  "exclude": [
+    "node_modules"
   ]
 }

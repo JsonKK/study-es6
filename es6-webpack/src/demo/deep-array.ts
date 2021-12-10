@@ -12,6 +12,7 @@ class DeepArray {
       sex: 'man'
     };
     this.addUrlParms();
+    console.log(Object.getOwnPropertyNames(DeepArray.prototype))
   }
 
   private _arrayOf() {
