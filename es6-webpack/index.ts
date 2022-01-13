@@ -41,13 +41,15 @@ import './src/assets/css/main.css';
 // import '@pages/19-async';
 
 // 类
-import '@pages/20-class';
+// import '@pages/20-class';
 
 //fetch api使用
 // import '@pages/21-fetch';
 
 
-//demo案例
+/**
+* demo案例
+*/ 
 
 // js中的继承
 // import '@demo/inherit.ts';
@@ -58,3 +60,6 @@ import '@pages/20-class';
 
 //调试睡眠函数
 // import '@demo/sleep.ts';
+
+//作用域中x的值
+import '@demo/scoped-x.ts';

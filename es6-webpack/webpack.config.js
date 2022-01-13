@@ -29,7 +29,7 @@ module.exports = {
 		contentBase: './dist',
 		hot: true,
 		compress: true,
-		port: 8081,
+		port: 8089,
 		host : '0.0.0.0',
 		clientLogLevel: 'none',
 		quiet: true
