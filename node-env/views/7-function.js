@@ -222,5 +222,18 @@ var main = function () {
 		console.log(copyObj,oldObj);
 	}
 
+	{
+		const setName = (obj)=>{
+			obj.name = 'nico';
+			obj = new Object();
+			obj.name = 'martin';
+		}
+		const person = new Object();
+		setName(person);
+		console.log({name : person.name});
+	}
+
 }
+
+
 module.exports = main;
